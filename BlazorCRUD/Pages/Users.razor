@@ -1,0 +1,59 @@
+﻿@page "/Users"
+@using BlazorCRUD.Data
+@inject UserService userService
+
+<NavLink class="nav-link" href="AddUser">
+    <span class="oi oi-plus" aria-hidden="true">Add New</span>
+
+</NavLink>
+
+<h1>User Info</h1>
+@if (uObj is null)
+{
+    <p><em>Loading... !</em></p>
+}
+else
+{
+    <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Designation</th>
+                    <th>City</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        <tbody>
+            @foreach(var u in uObj)
+                {
+            <tr>
+                <td>@u.Id</td>
+                <td>@u.Name</td>
+                <td>@u.Gender</td>
+                <td>@u.Designation</td>
+                <td>@u.City</td>
+                <td>
+                    <a class="nav-link" href="EditUser/@u.Id">
+                        <span class="oi oi-pencil" aria-hidden="true">Edit</span>
+                    </a>
+                    <a class="nav-link" href="Delete/@u.Id">
+                        <span class="oi oi-trash" aria-hidden="true">Delete</span>
+                    </a>
+                </td>
+            </tr>
+                }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    List<User> uObj;
+    protected override async Task OnInitializedAsync()
+    {
+        uObj = await Task.Run(() => userService.GetAllUsersAsync());
+       
+    }
+}

@@ -2,10 +2,9 @@
 @using BlazorCRUD.Data
 @inject UserService userService
 
-<NavLink class="nav-link" href="AddUser">
-    <span class="oi oi-plus" aria-hidden="true">Add New</span>
-
-</NavLink>
+<p>
+    <a class="btn btn-primary" href="AddUser">Add New User</a>
+</p>
 
 <h1>User Info</h1>
 @if (uObj is null)
@@ -35,11 +34,11 @@ else
                 <td>@u.Designation</td>
                 <td>@u.City</td>
                 <td>
-                    <a class="nav-link" href="EditUser/@u.Id">
-                        <span class="oi oi-pencil" aria-hidden="true">Edit</span>
+                        <a class="btn btn-warning btn-sm" href="EditUser/@u.Id">
+                        Edit
                     </a>
-                    <a class="nav-link" href="Delete/@u.Id">
-                        <span class="oi oi-trash" aria-hidden="true">Delete</span>
+                        <a class="btn btn-danger btn-sm" href="Delete/@u.Id">
+                        Delete
                     </a>
                 </td>
             </tr>
